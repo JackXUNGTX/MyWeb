@@ -1,0 +1,177 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 3rem 3rem;
+  color: #f4f7ff;
+}
+
+.hero {
+  max-width: 720px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  margin-bottom: 0.75rem;
+}
+
+.hero .lead {
+  color: rgba(244, 247, 255, 0.75);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.eyebrow {
+  letter-spacing: 0.3em;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #a0b8ff;
+  margin-bottom: 0.5rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.canvas-section {
+  position: relative;
+  height: 70vh;
+  min-height: 480px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(5, 6, 9, 0.45);
+  background: radial-gradient(circle at top, rgba(9, 14, 32, 0.9), rgba(3, 4, 10, 0.95));
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.control-dock {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.glass-panel {
+  background: rgba(10, 14, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  backdrop-filter: blur(12px);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.control-group .buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.control-group button {
+  flex: 1;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(120deg, #5568ff, #8f5aff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.control-group button:hover {
+  opacity: 0.9;
+}
+
+.control-group input[type='range'] {
+  width: 100%;
+  accent-color: #8f5aff;
+}
+
+.label {
+  color: rgba(244, 247, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(10, 14, 32, 0.85);
+}
+
+.info-panel h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.info-panel .description {
+  color: rgba(244, 247, 255, 0.7);
+  line-height: 1.7;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.fact-label {
+  color: rgba(244, 247, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.fact-value {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.facts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fact-item {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(143, 90, 255, 0.7);
+  color: rgba(244, 247, 255, 0.8);
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-section {
+    height: 55vh;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 1.5rem;
+  }
+
+  .control-group .buttons {
+    flex-direction: column;
+  }
+}
