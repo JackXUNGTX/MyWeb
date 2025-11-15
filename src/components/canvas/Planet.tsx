@@ -3,7 +3,12 @@ import { Line } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import type { Mesh } from 'three'
 import type { CelestialBody } from '../../data/bodies'
-import { DISTANCE_SCALE, ORBIT_LINE_THICKNESS, RADIUS_SCALE } from '../../constants/space'
+import {
+  DISTANCE_SCALE,
+  MIN_RENDER_RADIUS,
+  ORBIT_LINE_THICKNESS,
+  RADIUS_SCALE,
+} from '../../constants/space'
 import { useSimulationStore } from '../../store/useSimulationStore'
 
 type PlanetProps = {
@@ -44,30 +49,30 @@ export const Planet = ({ body }: PlanetProps) => {
     }
   })
 
-    const planetRadius = body.radiusKm * RADIUS_SCALE
+  const planetRadius = Math.max(body.radiusKm * RADIUS_SCALE, MIN_RENDER_RADIUS)
 
-    return (
-      <>
-        {orbitPoints && (
-          <Line
-            points={orbitPoints}
-            color="rgba(255,255,255,0.12)"
-            lineWidth={ORBIT_LINE_THICKNESS}
-            transparent
-            depthWrite={false}
-          />
-        )}
-        <mesh
-          ref={meshRef}
-          onClick={() => selectBody(body.id)}
-          onPointerOver={() => document.body.classList.add('show-pointer')}
-          onPointerOut={() => document.body.classList.remove('show-pointer')}
-          castShadow
-          receiveShadow
-        >
-          <sphereGeometry args={[planetRadius, 64, 64]} />
-          <meshStandardMaterial color={body.color} roughness={0.7} metalness={0.1} />
-        </mesh>
-      </>
-    )
+  return (
+    <>
+      {orbitPoints && (
+        <Line
+          points={orbitPoints}
+          color="rgba(255,255,255,0.12)"
+          lineWidth={ORBIT_LINE_THICKNESS}
+          transparent
+          depthWrite={false}
+        />
+      )}
+      <mesh
+        ref={meshRef}
+        onClick={() => selectBody(body.id)}
+        onPointerOver={() => document.body.classList.add('show-pointer')}
+        onPointerOut={() => document.body.classList.remove('show-pointer')}
+        castShadow
+        receiveShadow
+      >
+        <sphereGeometry args={[planetRadius, 64, 64]} />
+        <meshStandardMaterial color={body.color} roughness={0.7} metalness={0.1} />
+      </mesh>
+    </>
+  )
 }
