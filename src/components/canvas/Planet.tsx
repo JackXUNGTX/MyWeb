@@ -49,30 +49,36 @@ export const Planet = ({ body }: PlanetProps) => {
     }
   })
 
-  const planetRadius = Math.max(body.radiusKm * RADIUS_SCALE, MIN_RENDER_RADIUS)
+    const planetRadius = Math.max(body.radiusKm * RADIUS_SCALE, MIN_RENDER_RADIUS)
 
-  return (
-    <>
-      {orbitPoints && (
-        <Line
-          points={orbitPoints}
-          color="rgba(255,255,255,0.12)"
-          lineWidth={ORBIT_LINE_THICKNESS}
-          transparent
-          depthWrite={false}
-        />
-      )}
-      <mesh
-        ref={meshRef}
-        onClick={() => selectBody(body.id)}
-        onPointerOver={() => document.body.classList.add('show-pointer')}
-        onPointerOut={() => document.body.classList.remove('show-pointer')}
-        castShadow
-        receiveShadow
-      >
-        <sphereGeometry args={[planetRadius, 64, 64]} />
-        <meshStandardMaterial color={body.color} roughness={0.7} metalness={0.1} />
-      </mesh>
-    </>
-  )
+    return (
+      <>
+        {orbitPoints && (
+          <Line
+            points={orbitPoints}
+            color="rgba(255,255,255,0.12)"
+            lineWidth={ORBIT_LINE_THICKNESS}
+            transparent
+            depthWrite={false}
+          />
+        )}
+        <mesh
+          ref={meshRef}
+          onClick={() => selectBody(body.id)}
+          onPointerOver={() => document.body.classList.add('show-pointer')}
+          onPointerOut={() => document.body.classList.remove('show-pointer')}
+          castShadow
+          receiveShadow
+        >
+          <sphereGeometry args={[planetRadius, 64, 64]} />
+          <meshStandardMaterial
+            color={body.color}
+            emissive={body.color}
+            emissiveIntensity={0.5}
+            roughness={0.55}
+            metalness={0.15}
+          />
+        </mesh>
+      </>
+    )
 }
